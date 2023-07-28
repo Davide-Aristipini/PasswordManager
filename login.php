@@ -86,7 +86,7 @@ $conn->close();
                                     <?php 
                                     // Crea i campi input per inserire il codice 2FA
                                     for($i = 0; $i < 6; $i++) {
-                                        echo '<input type="text" id="code' . $i . '" name="code[]" maxlength="1" class="form-control input-code">';
+                                        echo '<input type="number" id="code' . $i . '" name="code[]" maxlength="1" class="form-control input-code">';
                                     }  ?>
                                 </div>
                             </div>
@@ -138,6 +138,45 @@ $conn->close();
                 }
             });
         });
+
+        // Funzione per controllare il contenuto della clipboard
+        function checkClipboardContent(event) {
+            const clipboardData = event.clipboardData || window.clipboardData;
+            if (clipboardData) {
+                // Leggi il contenuto della clipboard
+                const content = clipboardData.getData('text/plain');
+
+                // Controlla se il contenuto è un codice a 6 numeri
+                if (/^\d{6}$/.test(content)) {
+                    // Carica il codice nelle caselle di input
+                    const inputElements = document.querySelectorAll('.input-code');
+                    inputElements.forEach((input, index) => {
+                        input.value = content[index] || '';
+                    });
+
+                    // Mostra l'alert giallo
+                    showAlert('Riempimento automatico da appunti', 'alert-warning');
+                }
+            }
+        }
+
+        // Funzione per mostrare l'alert
+        function showAlert(message, className) {
+            const alertDiv = document.createElement('div');
+            alertDiv.classList.add('alert', className);
+            alertDiv.textContent = message;
+
+            const container = document.querySelector('.container');
+            container.insertBefore(alertDiv, container.firstChild);
+
+            // Rimuovi l'alert dopo 3 secondi
+            setTimeout(() => {
+                container.removeChild(alertDiv);
+            }, 3000);
+        }
+
+        // Aggiungi l'evento paste al documento
+        document.addEventListener('paste', checkClipboardContent);
     </script>
 </body>
 </html>
