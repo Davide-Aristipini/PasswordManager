@@ -1,4 +1,3 @@
-
 <?php
     // Inizializza la sessione (se non già inizializzata)
     session_start();
