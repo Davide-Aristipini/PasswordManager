@@ -61,7 +61,7 @@ $conn->close();
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
                         <h1 class="text-center mb-4">Portachiavi</h1>
@@ -73,6 +73,8 @@ $conn->close();
                                 <?php echo $error_message; ?>
                             </div>
                         <?php } ?>
+
+                        <!-- Form di login -->
                         <form action="login.php" method="post">
                             <div class="form-group">
                                 <label for="email">Email:</label>
@@ -84,7 +86,7 @@ $conn->close();
                                     <?php 
                                     // Crea i campi input per inserire il codice 2FA
                                     for($i = 0; $i < 6; $i++) {
-                                        echo '<input type="number" id="code' . $i . '" name="code[]" maxlength="1" class="form-control input-code">';
+                                        echo '<input type="number" id="code' . $i . '" name="code[]" min="0" max="9" class="form-control input-code mr-2" autocomplete="off">';
                                     }  ?>
                                 </div>
                             </div>
@@ -107,22 +109,26 @@ $conn->close();
             // Gestione dell'input del codice 2FA e passaggio automatico al campo successivo
             $('.input-code').keyup(function(e) {
                 if ($(this).val().length == $(this).attr('maxlength')) {
-                    $(this).next('.input-code').focus();
+                    if ($(this).next('.input-code').length > 0) {
+                        $(this).next('.input-code').focus();
+                    }
                 }
             });
 
             var codeInput = $('input[name="code[]"]');
-            codeInput.keyup(function(e) {
+            codeInput.keydown(function(e) {
                 if (e.keyCode == 8 || e.keyCode == 46) {
                     // Backspace o Delete premuto
-                    $(this).val(''); // Cancella il carattere corrente
-                    $(this).prev('input').focus(); // Passa al campo di input precedente
+                    if ($(this).val() == '') {
+                        $(this).prev('.input-code').focus(); // Passa al campo di input precedente
+                    }
                 } else if (e.keyCode == 13) {
                     // Invio premuto
                     var allFilled = true;
                     codeInput.each(function() {
                         if ($(this).val() == '') {
                             allFilled = false;
+                            return false; // Esci dal ciclo each se almeno un campo è vuoto
                         }
                     });
 
@@ -130,75 +136,9 @@ $conn->close();
                         // Se tutti i campi sono riempiti, invia il form
                         $('#form-2fa').submit();
                     }
-                } else {
-                    // Qualsiasi altro tasto premuto
-                    $(this).next('input').focus(); // Passa al campo di input successivo
                 }
             });
         });
     </script>
-    <script>
-        // Funzione per controllare il contenuto della clipboard
-        function checkClipboardContent(inputElement) {
-            if (window.navigator.clipboard) {
-                // Prova a leggere il contenuto della clipboard
-                window.navigator.clipboard.readText()
-                    .then((content) => {
-                        // Controlla se il contenuto è un codice a 6 numeri
-                        if (/^\d{6}$/.test(content)) {
-                            // Dividi il contenuto nei singoli caratteri
-                            const characters = content.split('');
-
-                            // Inserisci i caratteri nelle caselle di input
-                            characters.forEach((char, index) => {
-                                inputElement[index].value = char;
-                            });
-
-                            // Mostra l'alert giallo
-                            showAlert('Riempimento automatico da appunti', 'alert-warning');
-                        }
-                    })
-                    .catch((error) => {
-                        console.log('Errore durante la lettura della clipboard: ', error);
-                    });
-            }
-        }
-
-        // Funzione per mostrare l'alert
-        function showAlert(message, className) {
-            const alertDiv = document.createElement('div');
-            alertDiv.classList.add('alert', className);
-            alertDiv.textContent = message;
-
-            const container = document.querySelector('.container');
-            container.insertBefore(alertDiv, container.firstChild);
-
-            // Rimuovi l'alert dopo 3 secondi
-            setTimeout(() => {
-                container.removeChild(alertDiv);
-            }, 3000);
-        }
-
-        // Controlla la clipboard solo nelle caselle di input del codice 2FA quando viene effettuato l'incolla
-        document.addEventListener('paste', (event) => {
-            const inputElement = event.target;
-            if (inputElement.classList.contains('input-code')) {
-                checkClipboardContent(inputElement);
-                event.preventDefault(); // Evita l'incolla del testo nella casella di input
-            }
-        });
-
-        // Passa automaticamente al campo successivo quando si inserisce un carattere in una casella di input
-        document.addEventListener('input', (event) => {
-            const inputElement = event.target;
-            if (inputElement.classList.contains('input-code')) {
-                const nextInputElement = inputElement.nextElementSibling;
-                if (inputElement.value.length === 1 && nextInputElement) {
-                    nextInputElement.focus();
-                }
-            }
-        });
-    </script>
-
 </body>
 </html>
