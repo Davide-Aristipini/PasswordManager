@@ -59,46 +59,40 @@ $conn->close();
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="text-center mb-4">Portachiavi</h1>
-                        <h2 class="text-center mb-4">Login</h2>
+    <div class="container">
+        <h1>Salva Password</h1>
+        <h2>Login</h2>
 
-                        <!-- Card di errore o allerta -->
-                        <?php if (isset($error_message)) { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $error_message; ?>
-                            </div>
-                        <?php } ?>
-
-                        <!-- Form di login -->
-                        <form action="login.php" method="post">
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="code">Codice 2FA:</label>
-                                <div class="input-group">
-                                    <?php 
-                                    // Crea i campi input per inserire il codice 2FA
-                                    for($i = 0; $i < 6; $i++) {
-                                        echo '<input type="number" id="code' . $i . '" name="code[]" min="0" max="9" class="form-control input-code mr-2" autocomplete="off">';
-                                    }  ?>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-block">Accedi</button>
-                        </form>
-                        <p class="text-center mt-3">Non hai ancora un account? <a href="register.php">Registrati</a></p>
-                    </div>
+        <!-- Card di errore o allerta -->
+        <?php if (isset($error_message)) { ?>
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Errore</h5>
+                    <p class="card-text"><?php echo $error_message; ?></p>
                 </div>
             </div>
-        </div>
-    </div>
+        <?php } ?>
 
+        <!-- Form di login -->
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="code">Codice 2FA:</label>
+                <div class="input-code-group">
+                    <?php 
+                    // Crea i campi input per inserire il codice 2FA
+                    for($i = 0; $i < 6; $i++) {
+                        echo '<input type="number" inputmode="numeric" pattern="[0-9]*" id="code' . $i . '" name="code[]" class="form-control input-code" min="0" max="9" maxlength="1" oninput="validity.valid||(value=\'\');" required>';
+                    }  ?>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Accedi</button>
+        </form>
+        <p>Non hai ancora un account? <a href="register.php">Registrati</a></p>
+    </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>

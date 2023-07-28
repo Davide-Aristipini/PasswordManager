@@ -51,7 +51,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                 </div>';
 
         for($i = 0; $i < 6; $i++) {
-            echo '<input style="width: 14% !important;" type="number" id="code' . $i . '" name="code[]" maxlength="1" class="form-control mr-2 input-code">';
+            echo '<input type="number" inputmode="numeric" pattern="[0-9]*" id="code' . $i . '" name="code[]" class="form-control input-code" min="0" max="9" maxlength="1" oninput="validity.valid||(value=\'\');" required>';
         }
 
         echo '<div class="container text-center">';

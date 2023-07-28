@@ -1,22 +1,34 @@
-/* Reset dello stile di Bootstrap per rendere tutto il tema scuro */
+/* General styling */
 body {
-    color: #ffffff;
-    background-color: #1b1b1b;
+    background-color: #111;
+    color: #fff;
+    font-family: Arial, sans-serif;
 }
 
-/* Colori invertiti per le card e i pulsanti */
-.card {
-    background-color: #292929;
-    border-color: #343a40;
+.container {
+    margin-top: 50px;
 }
 
-.card-header {
-    background-color: #343a40;
-    color: #ffffff;
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
 }
 
-.card-body {
-    color: #ffffff;
+/* Form styling */
+.form-group label {
+    color: #fff;
+}
+
+.form-control {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+}
+
+.form-control:focus {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+    box-shadow: none;
 }
 
 .btn-primary {
@@ -29,48 +41,31 @@ body {
     border-color: #0056b3;
 }
 
-.btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
+/* Card styling */
+.card {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
 }
 
-.btn-secondary:hover {
-    background-color: #545b62;
-    border-color: #545b62;
+.card-body {
+    padding: 1.25rem;
 }
 
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
+.card-title {
+    color: #fff;
 }
 
-.btn-success:hover {
-    background-color: #1f9033;
-    border-color: #1f9033;
+.card-text {
+    color: #fff;
 }
 
-.btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
+/* Input code styling */
+.input-code-group {
+    display: flex;
+    justify-content: space-between;
 }
 
-.btn-danger:hover {
-    background-color: #a71d2a;
-    border-color: #a71d2a;
-}
-
-.btn-light {
-    background-color: #f8f9fa;
-    border-color: #f8f9fa;
-    color: #343a40;
-}
-
-.btn-light:hover {
-    background-color: #d9d9d9;
-    border-color: #d9d9d9;
-}
-
-/* Desktop and larger screens */
 .input-code {
     width: 100px !important;
     display: inline !important;
@@ -78,17 +73,19 @@ body {
     padding-right: 0px !important;
     padding-left: 0px !important;
     font-size: 70px !important;
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
 }
 
 /* Mobile and smaller screens */
 @media (max-width: 767px) {
     .input-code {
-        width: 60px !important; /* Aumenta la larghezza delle caselle di input su dispositivi mobili */
+        width: 30px !important;
         display: inline !important;
         text-align: center !important;
         padding-right: 0px !important;
         padding-left: 0px !important;
-        font-size: 40px !important; /* Riduci la dimensione del font su dispositivi mobili */
+        font-size: 30px !important;
     }
 }
-
