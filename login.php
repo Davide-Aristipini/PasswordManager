@@ -138,25 +138,31 @@ $conn->close();
                 }
             });
         });
-
+    </script>
+    <script>
         // Funzione per controllare il contenuto della clipboard
-        function checkClipboardContent(event) {
-            const clipboardData = event.clipboardData || window.clipboardData;
-            if (clipboardData) {
-                // Leggi il contenuto della clipboard
-                const content = clipboardData.getData('text/plain');
+        function checkClipboardContent(inputElement) {
+            if (window.navigator.clipboard) {
+                // Prova a leggere il contenuto della clipboard
+                window.navigator.clipboard.readText()
+                    .then((content) => {
+                        // Controlla se il contenuto è un codice a 6 numeri
+                        if (/^\d{6}$/.test(content)) {
+                            // Dividi il contenuto nei singoli caratteri
+                            const characters = content.split('');
 
-                // Controlla se il contenuto è un codice a 6 numeri
-                if (/^\d{6}$/.test(content)) {
-                    // Carica il codice nelle caselle di input
-                    const inputElements = document.querySelectorAll('.input-code');
-                    inputElements.forEach((input, index) => {
-                        input.value = content[index] || '';
+                            // Inserisci i caratteri nelle caselle di input
+                            characters.forEach((char, index) => {
+                                inputElement[index].value = char;
+                            });
+
+                            // Mostra l'alert giallo
+                            showAlert('Riempimento automatico da appunti', 'alert-warning');
+                        }
+                    })
+                    .catch((error) => {
+                        console.log('Errore durante la lettura della clipboard: ', error);
                     });
-
-                    // Mostra l'alert giallo
-                    showAlert('Riempimento automatico da appunti', 'alert-warning');
-                }
             }
         }
 
@@ -175,8 +181,26 @@ $conn->close();
             }, 3000);
         }
 
-        // Aggiungi l'evento paste al documento
-        document.addEventListener('paste', checkClipboardContent);
+        // Controlla la clipboard solo nelle caselle di input del codice 2FA quando viene effettuato l'incolla
+        document.addEventListener('paste', (event) => {
+            const inputElement = event.target;
+            if (inputElement.classList.contains('input-code')) {
+                checkClipboardContent(inputElement);
+                event.preventDefault(); // Evita l'incolla del testo nella casella di input
+            }
+        });
+
+        // Passa automaticamente al campo successivo quando si inserisce un carattere in una casella di input
+        document.addEventListener('input', (event) => {
+            const inputElement = event.target;
+            if (inputElement.classList.contains('input-code')) {
+                const nextInputElement = inputElement.nextElementSibling;
+                if (inputElement.value.length === 1 && nextInputElement) {
+                    nextInputElement.focus();
+                }
+            }
+        });
     </script>
+
 </body>
 </html>
