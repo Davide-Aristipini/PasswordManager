@@ -60,6 +60,3 @@ Se desideri contribuire a questo progetto, sei il benvenuto! Puoi seguire questi
 
 ## Ringraziamenti
 Un ringraziamento speciale a tutti coloro che hanno contribuito a rendere questo progetto possibile!
-
----
-**Nota**: Questo è solo un esempio di README per scopi illustrativi. Assicurati di personalizzarlo in base alle specifiche del tuo progetto e includere tutte le informazioni rilevanti. Utilizza formattazione Markdown, immagini, link e altre risorse per migliorare la presentazione e la leggibilità del tuo README su GitHub.
