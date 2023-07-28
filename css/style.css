@@ -1,0 +1,93 @@
+/* Reset dello stile di Bootstrap per rendere tutto il tema scuro */
+body {
+    color: #ffffff;
+    background-color: #1b1b1b;
+}
+
+/* Colori invertiti per le card e i pulsanti */
+.card {
+    background-color: #292929;
+    border-color: #343a40;
+}
+
+.card-header {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.card-body {
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+    border-color: #545b62;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #1f9033;
+    border-color: #1f9033;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #a71d2a;
+    border-color: #a71d2a;
+}
+
+.btn-light {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    color: #343a40;
+}
+
+.btn-light:hover {
+    background-color: #d9d9d9;
+    border-color: #d9d9d9;
+}
+
+/* Desktop and larger screens */
+.input-code {
+    width: 100px !important;
+    display: inline !important;
+    text-align: center !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+    font-size: 70px !important;
+}
+
+/* Mobile and smaller screens */
+@media (max-width: 767px) {
+    .input-code {
+        width: 30px !important;
+        display: inline !important;
+        text-align: center !important;
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+        font-size: 30px !important;
+    }
+}
