@@ -47,7 +47,7 @@ $sessionDuration = 86400; // 24 ore
 Questo progetto è rilasciato con licenza MIT. Vedi il file [LICENSE](LICENSE) per ulteriori dettagli.
 
 ## Contatti
-Per qualsiasi domanda o suggerimento, puoi contattarci all'indirizzo email supporto@salvapassword.com o visitare il nostro sito web [www.salvapassword.com](https://www.salvapassword.com).
+Per qualsiasi domanda o suggerimento, puoi visitare il sito web https://passwords.digitcom-informatica.com/.
 
 ## Contributi
 Se desideri contribuire a questo progetto, sei il benvenuto! Puoi seguire questi passaggi per iniziare:
