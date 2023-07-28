@@ -61,7 +61,7 @@ $conn->close();
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-body">
                         <h1 class="text-center mb-4">Portachiavi</h1>
@@ -73,8 +73,6 @@ $conn->close();
                                 <?php echo $error_message; ?>
                             </div>
                         <?php } ?>
-
-                        <!-- Form di login -->
                         <form action="login.php" method="post">
                             <div class="form-group">
                                 <label for="email">Email:</label>

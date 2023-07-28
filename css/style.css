@@ -83,11 +83,11 @@ body {
 /* Mobile and smaller screens */
 @media (max-width: 767px) {
     .input-code {
-        width: 30px !important;
+        width: 60px !important; /* Aumenta la larghezza delle caselle di input su dispositivi mobili */
         display: inline !important;
         text-align: center !important;
         padding-right: 0px !important;
         padding-left: 0px !important;
-        font-size: 30px !important;
+        font-size: 40px !important; /* Riduci la dimensione del font su dispositivi mobili */
     }
 }
